@@ -1,0 +1,111 @@
+API call Examples
+
+/api/1/getPlaybackInfo
+
+[method=getPlaybackInfo, key=t5478696, v=20120301, manualPlay=true, requiresUnlimited=false, extras=*.WEB, type=mp3-high, _authorization_key=eyJyYW5kIjogMjIwNjc4ODM4MCwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM1NzI3OTQ0fQ.l4ljmkbZYQU3tJqkYWEsQGGjoIM, playerName=_web_3005366]
+
+{"status": "ok", "result": {"baseIcon": "album/5/1/d/000000000006cd15/square-200.jpg", "userHasUnlimited": true, "canDownloadAlbumOnly": true, "artistUrl": "/artist/Maximum_Balloon/", "duration": 264, "album": "Maximum Balloon (Deluxe version)", "isClean": false, "albumUrl": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/", "shortUrl": "http://rd.io/x/QVr9gjcMy2k", "albumArtist": "Maximum Balloon", "canStream": true, "embedUrl": "http://rd.io/e/QVr9gjcMy2k", "type": "t", "surl": "http://m.cdn2.rd.io/s/music/2/6/9/e/269ecceb037b4042b5b2e33751e88d46/full-192.mp3?80e2d2f4276a71565175a0c05c3f54afe89e4a8a0723795d026474c040c27db4a898", "price": "0.99", "trackNum": 4, "albumArtistKey": "r369941", "key": "t5478696", "icon": "http://cdn3.rd.io/album/5/1/d/000000000006cd15/square-200.jpg", "canSample": true, "name": "If You Return", "isExplicit": false, "artistKey": "r369941", "url": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/track/If_You_Return/", "albumKey": "a445717", "artist": "Maximum Balloon", "canDownload": true, "length": 1, "canTether": true}, "clientVersion": 1335572034}
+
+
+
+
+www.rdio.com
+
+/api/1/getObjectFromUrl
+
+[method=getObjectFromUrl, url=people/state_machine/playlists/785247/more_like_this/, extras[]=isPublished, v=20120301, _authorization_key=eyJyYW5kIjogNDAwNDc4OTk0MiwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM1NzMwODE3fQ.ez7LqutwxYhxEM0UFZ3pqwZlM6E]
+
+{
+  "status": "ok",
+  "result": {
+    "collaborationMode": 0,
+    "baseIcon": "album/5/1/d/000000000006cd15/square-200.jpg",
+    "owner": "David Taylor",
+    "iframeUrl": "http://rd.io/i/QVr9gjNUqR4",
+    "duration": 264,
+    "allowCollaboration": false,
+    "ownerIcon": "user/d/d/f/000000000005bfdd/square-100.jpg",
+    "shortUrl": "http://rd.io/x/QVr9gjNUqR4",
+    "isCollaborating": false,
+    "embedUrl": "http://rd.io/e/QVr9gjNUqR4",
+    "type": "p",
+    "description": "",
+    "price": "0.99",
+    "ownerKey": "s376797",
+    "lastUpdated": 1335598566.0,
+    "tracks": {
+      "items": [
+        {
+          "baseIcon": "album/5/1/d/000000000006cd15/square-200.jpg",
+          "canDownloadAlbumOnly": true,
+          "iframeUrl": "http://rd.io/i/QVr9gjcMy2k",
+          "artistUrl": "/artist/Maximum_Balloon/",
+          "duration": 264,
+          "album": "Maximum Balloon (Deluxe version)",
+          "isClean": false,
+          "albumUrl": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/",
+          "shortUrl": "http://rd.io/x/QVr9gjcMy2k",
+          "albumArtist": "Maximum Balloon",
+          "canStream": true,
+          "embedUrl": "http://rd.io/e/QVr9gjcMy2k",
+          "type": "t",
+          "price": "0.99",
+          "trackNum": 4,
+          "albumArtistKey":"r369941",
+          "key": "t5478696",
+          "icon": "http://cdn3.rd.io/album/5/1/d/000000000006cd15/square-200.jpg",
+          "canSample": true,
+          "name": "If You Return",
+          "isExplicit": false,
+          "artist": "Maximum Balloon",
+          "url": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/track/If_You_Return/",
+          "albumKey": "a445717",
+          "artistKey": "r369941",
+          "canDownload": true,
+          "length": 1,
+          "canTether": true
+        }
+      ],
+      "total": 1,
+      "type": "list"
+    },
+    "key": "p785247",
+    "playCount": 8,
+    "icon": "http://m.rdio.com/_is/?aid=445717-0&w=200&h=200",
+    "subscriberCount": 0,
+    "collaborators": [],
+    "name": "more like this",
+    "url": "/people/state_machine/playlists/785247/more_like_this/",
+    "isPublished": true,
+    "length": 1,
+    "ownerUrl": "/people/state_machine/",
+    "reasonNotViewable": 3
+  },
+
+  "clientVersion": 1335572034
+}
+
+www.rdio.com
+
+/api/1/getRecentListeners
+
+[method=getRecentListeners, count=18, key=p785247, v=20120301, extras=*.WEB, _authorization_key=eyJyYW5kIjogNDAwNDc4OTk0MiwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM1NzMwODE3fQ.ez7LqutwxYhxEM0UFZ3pqwZlM6E]
+
+{"status": "ok", "result": {"items": [{"firstName": "David", "baseIcon": "user/d/d/f/000000000005bfdd/square-100.jpg", "gender": "m", "canUnfollow": false, "url": "/people/state_machine/", "location": "New York", "key": "s376797", "lastName": "Taylor", "libraryVersion": 668, "type": "s", "icon": "http://cdn3.rd.io/user/d/d/f/000000000005bfdd/square-100.jpg"}], "type": "list"}, "clientVersion": 1335572034}
+
+[474] getObjectFromUrl
+[064] getComments
+[130] getRecentListeners
+[056] getRecentListeners
+[800] get
+[800] [method=get, v=20120301, extras=[{"field":"*","exclude":true},{"field":"url","keys":["p785247","s376797"]},{"field":"icon","keys":["p785247","s376797"]},{"field":"firstName","keys":["s376797"]},{"field":"lastName","keys":["s376797"]},{"field":"playlistCount","keys":["s376797"]},{"field":"canUnfollow","keys":["s376797"]}], _authorization_key=eyJyYW5kIjogMzUxMzkxMzQ1OSwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM1NzQ0ODcxfQ.HvTVGEyW5XsBopTn5utKaYuMteY, keys[]=s376797]
+[256] get
+[256] [method=get, v=20120301, extras=[{"field":"*","exclude":true},{"field":"libraryVersion","keys":["s376797"]},{"field":"lastSongPlayed","keys":["s34251","s1359351"]},{"field":"lastSourcePlayed","keys":["s34251","s1359351"]}], _authorization_key=eyJyYW5kIjogMzUxMzkxMzQ1OSwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM1NzQ0ODcxfQ.HvTVGEyW5XsBopTn5utKaYuMteY, keys[]=s34251]
+--- addSongSkippedTime
+--- getPlaybackInfo
+--- savePlayerState
+--- addTrackPlay
+
+
+
+"tracks": {"items": [{"baseIcon": "album/5/1/d/000000000006cd15/square-200.jpg", "canDownloadAlbumOnly": true, "iframeUrl": "http://rd.io/i/QVr9gjcMy2k", "artistUrl": "/artist/Maximum_Balloon/", "duration": 264, "album": "Maximum Balloon (Deluxe version)", "isClean": false, "albumUrl": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/", "shortUrl": "http://rd.io/x/QVr9gjcMy2k", "albumArtist": "Maximum Balloon", "canStream": true, "embedUrl": "http://rd.io/e/QVr9gjcMy2k", "type": "t", "price": "0.99", "trackNum": 4, "albumArtistKey": "r369941", "key": "t5478696", "icon": "http://cdn3.rd.io/album/5/1/d/000000000006cd15/square-200.jpg", "canSample": true, "name": "If You Return", "isExplicit": false, "artist": "Maximum Balloon", "url": "/artist/Maximum_Balloon/album/Maximum_Balloon_(Deluxe_version)/track/If_You_Return/", "albumKey": "a445717", "artistKey": "r369941", "canDownload": true, "length": 1, "canTether": true}, {"baseIcon": "album/a/e/7/00000000000a47ea/square-200.jpg", "canDownloadAlbumOnly": true, "iframeUrl": "http://rd.io/i/QVr9gjclDJA", "artistUrl": "/artist/The_Naked_And_Famous/", "duration": 246, "album": "Passive Me, Aggressive You", "isClean": false, "albumUrl": "/artist/The_Naked_And_Famous/album/Passive_Me%2C_Aggressive_You/", "shortUrl": "http://rd.io/x/QVr9gjclDJA", "albumArtist": "The Naked And Famous", "canStream": true, "embedUrl": "http://rd.io/e/QVr9gjclDJA", "type": "t", "price": "1.29", "trackNum": 7, "albumArtistKey": "r723387", "key": "t8019665", "icon": "http://cdn3.rd.io/album/a/e/7/00000000000a47ea/square-200.jpg", "canSample": true, "name": "Young Blood", "isExplicit": false, "artist": "The Naked And Famous", "url": "/artist/The_Naked_And_Famous/album/Passive_Me%2C_Aggressive_You/track/Young_Blood/", "albumKey": "a673770", "artistKey": "r723387", "canDownload": true, "length": 1, "canTether": true}], "total": 2, "type": "list"}
