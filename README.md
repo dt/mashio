@@ -1,3 +1,5 @@
+Mashio - a Content-injecting Rdio Proxy
+==
 Mashio consists of 3 parts:
   * An API proxy server which wraps the rdio API and injects custom content into their API responses
   * An AMF server to stream custom content to the rdio player
