@@ -11,7 +11,9 @@ The API proxy is build in scala with finagle and play-json to recieve, filter an
 
 Building and running the api-proxy:
 > cd api-proxy
+
 > sbt compile
+
 > sbt run
 
 AMF Server
