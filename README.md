@@ -9,6 +9,11 @@ API Proxy
 ==
 The API proxy is build in scala with finagle and play-json to recieve, filter and manipulate API queries from the rdio appliation.
 
+Building and running the api-proxy:
+> cd api-proxy
+> sbt compile
+> sbt run
+
 AMF Server
 ==
 PyAMF?
