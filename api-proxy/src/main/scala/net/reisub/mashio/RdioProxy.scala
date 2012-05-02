@@ -13,9 +13,15 @@ import play.api.libs.json._
 class RdioProxy extends Service[Request, Response] {
   def baseClient(host: String) = ClientBuilder().hosts(host).hostConnectionLimit(2).codec(Http()).build()
   val rdioWeb: Service[HttpRequest, HttpResponse] = baseClient("rdio.com:80")
+  val rdioMobile: Service[HttpRequest, HttpResponse] = baseClient("m.rdio.com:80")
   val rdioApi: Service[HttpRequest, HttpResponse] = baseClient("rdio.api.mashery.com:80")
 
-  def clientFor(request: Request) = if (request.getHeader("Host") == "api.rdio.com") rdioApi else rdioWeb
+  def clientFor(request: Request) = request.getHeader("Host") match {
+    case "api.rdio.com" => rdioApi
+    case "m.rido.com" => rdioMobile
+    case _ => rdioWeb
+  }
+
   def isApi(request: Request) = clientFor(request) == rdioApi || request.path.startsWith("/api/")
   def fetchRdioResp(request: Request) = clientFor(request)(request).map(Response(_))
 
