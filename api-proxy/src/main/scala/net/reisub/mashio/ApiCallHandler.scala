@@ -10,6 +10,8 @@ import net.reisub.mashio.RichJsObject.Implicits._
 
 
 object ApiCallHander {
+  val brem = "http://f.cl.ly/items/3l2s3z3i2Y3C2t1S2W2i/PigPen%20Theatre%20Co.%20-%20Bremen%20-%2005%20Bremen.mp3"
+
   object Colors {
     val all = Set(unhandled, error, good)
     val unhandled = Console.CYAN
@@ -25,21 +27,25 @@ object ApiCallHander {
     "addTimedPlayInformation"
    )
 
-  def handleApiReq(request: Request, respF: Request => Future[Response]): Future[Response] = {
+  def handleApiReq(request: Request, fetch: Request => Future[Response]): Future[Response] = {
     val method = request.getParam("method")
 
     method match {
       case "getObjectFromUrl" =>
-        getObjectFromUrl(request, respF)
+        getObjectFromUrl(request, fetch)
+
+      case "getPlaybackInfo" =>
+        getPlaybackInfo(request, fetch)
 
       case "getComments" =>
-        getComments(request, respF)
+        getComments(request, fetch)
 
       case "addTrackPlay" =>
-        addTrackPlay(request, respF)
+        addTrackPlay(request, fetch)
+
 
       case callback if PlaybackCallbacks(callback) =>
-        playbackCallback(callback, request, respF)
+        playbackCallback(callback, request, fetch)
 
       case "jsError" => {
         val reqid = Log("jsError", request, Colors.error, error _)
@@ -50,17 +56,17 @@ object ApiCallHander {
       case other => {
         val reqid = Log(other, request, Colors.unhandled)
         Log.params(reqid, request, Colors.unhandled)
-        Resp(reqid, respF(request))
+        Resp(reqid, fetch(request))
       }
     }
   }
 
-  def getObjectFromUrl(request: Request, respF: Request => Future[Response]): Future[Response] = {
+  def getObjectFromUrl(request: Request, fetch: Request => Future[Response]): Future[Response] = {
     val reqid = Log("getObjectFromUrl", request)
     val url = request.getParam("url")
 
     if (url == "people/state_machine/playlists/785247/more_like_this/") {
-      Resp(reqid, respF(request).map{ resp =>
+      Resp(reqid, fetch(request).map{ resp =>
         val body = resp.contentString
         for {
           json <- Json.parse(body).asOpt[JsObject]
@@ -76,11 +82,33 @@ object ApiCallHander {
         resp
       })
     } else {
-      Resp(reqid, respF(request))
+      Resp(reqid, fetch(request))
     }
   }
 
-  def getComments(request: Request, respF: Request => Future[Response]): Future[Response] = {
+  def getPlaybackInfo(request: Request, fetch: Request => Future[Response]): Future[Response] = {
+    val key = request.getParam("key")
+
+    val reqid = Log("getPlaybackInfo key="+key, request)
+
+    if (key == "t2910908") {
+      Resp(reqid, fetch(request).map{ resp =>
+        val body = resp.contentString
+        for {
+          json <- Json.parse(body).asOpt[JsObject]
+          swapped <- (json / "result" / "surl").setTo(Json.toJson(brem))
+        } {
+          val jsonString = getJsonString(swapped)
+          Resp.setContent(resp, jsonString)
+        }
+        resp
+      })
+    } else {
+      Resp(reqid, fetch(request))
+    }
+  }
+
+  def getComments(request: Request, fetch: Request => Future[Response]): Future[Response] = {
     val obj = request.getParam("object")
 
     val reqid = Log("getComments "+obj, request)
@@ -88,32 +116,32 @@ object ApiCallHander {
     if (Helpers.isInternal(obj))
       Resp.dummy(reqid, """{"items": [], "type": "list"}""")
     else
-      Resp(reqid, respF(request))
+      Resp(reqid, fetch(request))
   }
 
-  def addTrackPlay(request: Request, respF: Request => Future[Response]): Future[Response] = {
+  def addTrackPlay(request: Request, fetch: Request => Future[Response]): Future[Response] = {
     val key = request.getParam("key")
     val reqid =  Log("addTrackPlay "+key, request)
     if (Helpers.isInternal(key))
       Resp.dummy(reqid, "{\"txid\": \"" + Helpers.generateInternalTxId + "\"}")
     else
-      Resp(reqid, respF(request))
+      Resp(reqid, fetch(request))
   }
 
-  def playbackCallback(name: String, request: Request, respF: Request => Future[Response]): Future[Response] = {
+  def playbackCallback(name: String, request: Request, fetch: Request => Future[Response]): Future[Response] = {
     val reqid = Log(name, request)
     val txid = request.getParam("txid")
     if (Helpers.isInternalTxId(txid))
       Resp.dummy(reqid, "{}")
     else
-      Resp(reqid, respF(request))
+      Resp(reqid, fetch(request))
   }
 
   // Helpers are organized into objects, because I felt like it.
 
   // Response helpers, for logging respose bodies and generating dummy responses
   object Resp {
-    def apply(reqid: String, respF: Future[Response]): Future[Response] = respF.map { resp =>
+    def apply(reqid: String, fetch: Future[Response]): Future[Response] = fetch.map { resp =>
       debug(reqid + " ->\t" + resp.contentString)
       resp
     }
@@ -139,7 +167,7 @@ object ApiCallHander {
     }
 
     def params(reqid: String, request: Request, color: String = Colors.good, f: (=> String) => Unit = debug _) = {
-      f(color + reqid + "<- \t" + request.getParams.toString + Console.WHITE)
+      f(color + reqid + " <-\t" + request.getParams.toString + Console.WHITE)
     }
   }
 

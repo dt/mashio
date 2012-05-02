@@ -13,7 +13,10 @@ object MashioApiBuild extends Build {
     scalaVersion := buildScalaVersion
   )
 
-  val coda = "repo.codahale.com" at "http://repo.codahale.com"
+  val res = Seq(
+    "repo.codahale.com" at "http://repo.codahale.com",
+    "twitter.com" at "http://maven.twttr.com/"
+  )
 
   val deps = Seq(
     "com.twitter"           % "finagle-core_2.9.1"  % "1.9.12",
@@ -28,7 +31,7 @@ object MashioApiBuild extends Build {
   lazy val root = Project(id = "mashio-proxy",
                             base = file("."),
                             settings = buildSettings ++ Seq(
-                              resolvers += coda,
+                              resolvers ++= res,
                               libraryDependencies ++= deps
                             )
   ) dependsOn (playJson)
