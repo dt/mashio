@@ -3,7 +3,7 @@ package net.reisub
 import play.api.libs.json._
 
 package object mashio {
-  private var enableDebug: Boolean = true
+  private var enableDebug: Boolean = false
   def debugOn: Boolean = enableDebug
   def setDebug(on: Boolean) { enableDebug = on }
   def debug(msg: => String) { if (debugOn) println(msg) }
