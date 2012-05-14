@@ -1,0 +1,14 @@
+@(artist: net.reisub.mashio.models.Artist, albums: Iterator[net.reisub.mashio.models.Album])
+
+@main(artist.name + " - Mashio", List((None, artist.name))){@common()}{
+  <h1>@artist.name</h1>
+  
+  <ul class="thumbnails">
+  @albums.map{album => 
+    <li class="span2"><a class="thumbnail" href="@routes.Browse.album(artist._id, album._id)">
+      @album.artwork.map{art => <img src="@routes.Media.art(art)" alt="@album.title" />}.getOrElse{@album.title}
+    </a></li>
+  }  
+    <li class="span2"><a class="thumbnail" href="@routes.Browse.addAlbum(artist._id)">Add</a></li>
+  </ul>
+}

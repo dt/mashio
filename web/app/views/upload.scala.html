@@ -1,0 +1,18 @@
+@main("Upload Tracks - Mashio") {@common()} {
+  <h1>Upload</h1> 
+
+  <div id="file-uploader">
+      <h1>Upload</h1>
+      <script>
+          function createUploader(){
+              var uploader = new qq.FileUploader({
+                  element: document.getElementById('file-uploader'),
+                  action: '/upload',
+                  debug: true
+              });
+          }
+          window.onload = createUploader;
+      </script>    
+  </div>
+
+}
