@@ -1,33 +1,19 @@
 Mashio - a Content-injecting Rdio Proxy
 ==
 Mashio consists of 3 parts:
-  * An API proxy server which wraps the rdio API and injects custom content into their API responses
-  * An AMF server to stream custom content to the rdio player
-  * A web app to manage the custom content
+  * An proxy server which wraps the rdio API and injects custom content into their API responses
+  * A web app to add, remove and manage custom content
+  * An streaming server to stream transcoded content to the rdio player
 
 API Proxy
 ==
-The API proxy is build in scala with finagle and play-json to recieve, filter and manipulate API queries from the rdio appliation.
-
-To redirect rdio's traffic to a local proxy, add `www.rdio.com` and `api.rdio.com` to localhost entry in `/etc/hosts`:
-g
-> 127.0.0.1 localhost api.rdio.com www.rdio.com
-
-By default the api-proxy listens on port 4098. The rdio client defaults to making requests on port 80. To forward port 80 to 4098:
-* on OSX
-> sudo ipfw add 100 fwd 127.0.0.1,4098 tcp from any to me 80
-
-Building and running the api-proxy:
-> cd api-proxy
-
-> sbt compile
-
-> sbt run
-
-AMF Server
-==
-PyAMF?
+The API proxy is build in Scala, using [finagle](https://github.com/twitter/finagle) and [play-json](https://github.com/tinystatemachine/play-json) to recieve, filter and manipulate API queries from the rdio appliation, and [Salat](https://github.com/novus/salat) for talking to mongo.
 
 Web App
 ==
-Play?
+The webapp uses [Play Framework](http://www.playframework.org/documentation/2.0/Home), [Salat](https://github.com/novus/salat) and [Bootstrap](https://github.com/twitter/bootstrap).
+
+Streaming
+==
+TODO
+
