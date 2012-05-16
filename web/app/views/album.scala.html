@@ -4,19 +4,20 @@
   Some(routes.Browse.artist(artist._id)) -> artist.name,
   None -> album.title
 )) {@common()} {
-  <h1>@artist.name - @album.title</h1> 
+  <h1>@artist.name - @album.title</h1>
+  <p>@album.year</p>
 
   <h2>@album.tracks.size Tracks</h1>
   <ul>
     <table class="table table-striped">
-    @tracks.map{item => 
+    @tracks.map{item =>
         <tr>
           <td>@item.track.trackNum</td>
           <td>@item.track.title</td>
           <td>@if(item.track.artist != album.artist){item.artist.name}</td>
           <td>@item.track.length</td>
         </tr>
-      }  
-    </table>  
+      }
+    </table>
   </ul>
 }

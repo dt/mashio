@@ -14,5 +14,5 @@ package object models {
     def get[T]: TaggedId[T] = apply(new ObjectId)
   }
 
-  object Query { def apply(clauses: (String, Any)*) = MongoDBObject.apply(clauses: _*) } 
+  object Query { def apply(clauses: (String, Any)*) = MongoDBObject.apply(clauses: _*) }
 }

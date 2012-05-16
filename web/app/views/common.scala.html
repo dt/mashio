@@ -1,7 +1,7 @@
 <div class="well sidebar-nav">
   <ul class="nav nav-list">
     <li class="nav-header">Artists</li>
-    @Artist.dao.findAll().map { artist =>
+    @Artist.db.findAll().map { artist =>
       <li><a href="@routes.Browse.artist(artist._id)">@artist.name</a></li>
     }
    </ul>

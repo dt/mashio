@@ -1,0 +1,7 @@
+target/
+.DS_Store
+project/boot/
+.lib_managed/
+.settings/
+.cache
+.ensime*
