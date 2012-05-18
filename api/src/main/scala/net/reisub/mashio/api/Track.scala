@@ -1,8 +1,8 @@
-package net.reisub.mashio
+package net.reisub.mashio.api
 
 import play.api.libs.json._
 
-class Track(
+class ApiTrack(
   val baseIcon: String,
   val canDownloadAlbumOnly: Boolean = true,
   val iframeUrl: String,
@@ -33,9 +33,9 @@ class Track(
   val canTether: Boolean = true
 )
 
-object Track {
-  implicit object TrackInfoFormat extends Format[Track] {
-    def reads(json: JsValue): Track = new Track(
+object ApiTrack {
+  implicit object TrackInfoFormat extends Format[ApiTrack] {
+    def reads(json: JsValue): ApiTrack = new ApiTrack(
       baseIcon          = (json \ "baseIcon").asOpt[String].getOrElse(""),
       canDownloadAlbumOnly = (json \ "canDownloadAlbumOnly").asOpt[Boolean].getOrElse(true),
       iframeUrl         = (json \ "iframeUrl").asOpt[String].getOrElse(""),
@@ -66,7 +66,7 @@ object Track {
       canTether         = (json \ "canTether").asOpt[Boolean].getOrElse(true)
     )
 
-    def writes(t: Track): JsValue = JsObject(List(
+    def writes(t: ApiTrack): JsValue = JsObject(List(
       "baseIcon"        -> JsString(t.baseIcon),
       "canDownloadAlbumOnly"  -> JsBoolean(t.canDownloadAlbumOnly),
       "iframeUrl"       -> JsString(t.iframeUrl),
@@ -99,5 +99,5 @@ object Track {
   }
 
   val youngBloodJson = """{"baseIcon": "album/a/e/7/00000000000a47ea/square-200.jpg", "canDownloadAlbumOnly": true, "iframeUrl": "http://rd.io/i/QVr9gjclDJA", "artistUrl": "/artist/The_Naked_And_Famous/", "duration": 246, "album": "Passive Me, Aggressive You", "isClean": false, "albumUrl": "/artist/The_Naked_And_Famous/album/Passive_Me%2C_Aggressive_You/", "shortUrl": "http://rd.io/x/QVr9gjclDJA", "albumArtist": "The Naked And Famous", "canStream": true, "embedUrl": "http://rd.io/e/QVr9gjclDJA", "type": "t", "price": "1.29", "trackNum": 7, "albumArtistKey": "r723387", "key": "t8019665", "icon": "http://cdn3.rd.io/album/a/e/7/00000000000a47ea/square-200.jpg", "canSample": true, "name": "Young Blood", "isExplicit": false, "artist": "The Naked And Famous", "url": "/artist/The_Naked_And_Famous/album/Passive_Me%2C_Aggressive_You/track/Young_Blood/", "albumKey": "a673770", "artistKey": "r723387", "canDownload": true, "length": 1, "canTether": true}"""
-  val youngBlood = Json.parse(youngBloodJson).as[Track]
+  val youngBlood = Json.parse(youngBloodJson).as[ApiTrack]
 }

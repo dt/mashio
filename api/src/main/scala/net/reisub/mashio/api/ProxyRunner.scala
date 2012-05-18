@@ -1,4 +1,4 @@
-package net.reisub.mashio
+package net.reisub.mashio.api
 
 import com.twitter.finagle.builder.{Server, ServerBuilder}
 import com.twitter.finagle.http._

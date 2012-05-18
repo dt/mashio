@@ -1,4 +1,4 @@
-package net.reisub.mashio
+package net.reisub.mashio.api
 import play.api.libs.json._
 
 class RichJsObject(obj: JsObject) {

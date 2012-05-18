@@ -1,8 +1,8 @@
-package net.reisub
+package net.reisub.mashio
 
 import play.api.libs.json._
 
-package object mashio {
+package object api {
   private var enableDebug: Boolean = false
   def debugOn: Boolean = enableDebug
   def setDebug(on: Boolean) { enableDebug = on }

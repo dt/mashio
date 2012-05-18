@@ -1,4 +1,4 @@
-package net.reisub.mashio
+package net.reisub.mashio.api
 
 import com.twitter.finagle.http._
 import com.twitter.util.Future
@@ -6,7 +6,7 @@ import org.jboss.netty.handler.codec.http.HttpResponse
 import org.jboss.netty.handler.codec.http.{DefaultHttpResponse, HttpResponseStatus, HttpVersion}
 import play.api.libs.json._
 import scala.util.Random
-import net.reisub.mashio.RichJsObject.Implicits._
+import net.reisub.mashio.api.RichJsObject.Implicits._
 
 
 object ApiCallHander {
@@ -72,7 +72,7 @@ object ApiCallHander {
           json <- Json.parse(body).asOpt[JsObject]
           total <- (json \ "result" \ "tracks" \ "total").asOpt[Int]
           items <- (json \ "result" \ "tracks" \ "items").asOpt[List[JsValue]]
-          val newItems = Json.toJson(Track.youngBlood) :: items
+          val newItems = Json.toJson(ApiTrack.youngBlood) :: items
           withNewItems <- (json / "result" / "tracks" / "items").setTo(Json.toJson(newItems))
           withNewCount <- (withNewItems / "result" / "tracks" / "total").setTo(JsNumber(newItems.size))
         } {
