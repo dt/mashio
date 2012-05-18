@@ -12,6 +12,9 @@ import play.api.libs.json._
 
 class RdioProxy extends Service[Request, Response] {
   def baseClient(host: String) = ClientBuilder().hosts(host).hostConnectionLimit(2).codec(Http()).build()
+
+  val handler = ApiCallHandler
+
   val rdioWeb: Service[HttpRequest, HttpResponse] = baseClient("rdio.com:80")
   val rdioMobile: Service[HttpRequest, HttpResponse] = baseClient("m.rdio.com:80")
   val rdioApi: Service[HttpRequest, HttpResponse] = baseClient("rdio.api.mashery.com:80")
@@ -28,7 +31,7 @@ class RdioProxy extends Service[Request, Response] {
   def apply(request: Request) = {
     if (isApi(request)) {
       try {
-        ApiCallHander.handleApiReq(request, fetchRdioResp _)
+        handler.handleApiReq(request, fetchRdioResp _)
       } catch {
         case e: Exception => {
           println(Console.RED + e.getClass.getName + Console.WHITE)

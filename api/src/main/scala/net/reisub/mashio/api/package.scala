@@ -13,6 +13,10 @@ package object api {
   def setInfo(on: Boolean) { enableInfo = on }
   def info(msg: => String) { if (infoOn) println(msg) }
 
+  private var enableGathering: Boolean = false
+  def gatheringOn: Boolean = enableGathering
+  def setGathering(on: Boolean) { enableGathering = on }
+
   def error(msg: => String) { println(msg) }
 
   def getJsonString(json: JsValue): String = Json.stringify(json).replaceAll(""""([a-zA-Z0-9]+)":""", """"$1": """)

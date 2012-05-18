@@ -5,7 +5,8 @@ case class Album(_id: Album.Id,
 	title: String,
 	year: Option[String] = None,
 	artwork: Option[String] = None,
-	tracks: Set[Track.Id] = Set()
+	tracks: Set[Track.Id] = Set(),
+  rdioId: Option[RdioId]
 ) {
   def setArtwork(path: String) =
     Album.db.updateOne(_id, Query("$set" -> Query("artwork" -> path)))
@@ -22,8 +23,17 @@ object Album extends MetaModel[Album]("album") {
     findByArtistAndTitle(artist, title).get
   }
 
-  def findByArtistAndTitle(artistId: Artist.Id, title: String): Option[Album] =
-    db.findOne(Query("artist" -> artistId, "title" -> title))
+  def harmonize(artist: Artist.Id, title: String, rdioId: RdioId) = {
+    db.upsert(Query("artist" -> artist, "title" -> title),
+        Query("$set" -> Query("artist" -> artist, "title" -> title, "rdioId" -> rdioId)))
+    findByRdioId(rdioId)
+  }
+
+  def findByRdioId(id: RdioId): Option[Album] =
+    db.findOne(Query("rdioId" -> id))
+
+  def findByArtistAndTitle(artist: Artist.Id, title: String): Option[Album] =
+    db.findOne(Query("artist" -> artist, "title" -> title))
 
   def addTrack(album: Id, track: Track.Id) =
     Album.db.updateOne(album, Query("$addToSet" -> Query("tracks" -> track)))

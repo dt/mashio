@@ -6,7 +6,8 @@ case class Track(_id: Track.Id,
 	title: String,
 	trackNum: Option[Int],
 	length: Option[Int],
-	path: Option[String]
+	path: Option[String] = None,
+  rdioId: Option[RdioId] = None
 )
 
 case class DisplayTrack(track: Track, artist: Artist)
@@ -24,4 +25,7 @@ object Track extends MetaModel[Track]("track") {
   	Album.addTrack(album, track._id)
   	track
   }
+
+  def findByRdioId(id: RdioId): Option[Track] =
+    db.findOne(Query("rdioId" -> id))
 }

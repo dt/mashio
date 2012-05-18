@@ -5,7 +5,7 @@ import com.mongodb.casbah.Imports._
 import com.mongodb.WriteConcern
 import com.novus.salat.dao.{ModelCompanion, SalatDAO}
 
-abstract class MetaModel[T <: AnyRef : Manifest](collectionName: String) {
+abstract class MetaModel[T <: AnyRef : Manifest](val collectionName: String) {
   type Id = TaggedId[T]
   def newId = TaggedId.get[T]
 
@@ -19,9 +19,12 @@ abstract class MetaModel[T <: AnyRef : Manifest](collectionName: String) {
     def findAll(ids: Iterable[Id]): Iterator[T] = find(Query("_id" -> Query("$in" -> ids)))
   }
 
+  def clearAll() = db.remove(Query())
+
   def reload(id: Id): T = db.findOneByID(id).get
 }
 
 object MetaModel {
+  def ALL = Set(Artist, Album, Track)
   var ctx = com.novus.salat.global.ctx
 }

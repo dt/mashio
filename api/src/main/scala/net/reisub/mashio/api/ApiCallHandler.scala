@@ -8,16 +8,9 @@ import play.api.libs.json._
 import scala.util.Random
 import net.reisub.mashio.api.RichJsObject.Implicits._
 
+object ApiCallHandler {
 
-object ApiCallHander {
   val brem = "http://f.cl.ly/items/3l2s3z3i2Y3C2t1S2W2i/PigPen%20Theatre%20Co.%20-%20Bremen%20-%2005%20Bremen.mp3"
-
-  object Colors {
-    val all = Set(unhandled, error, good)
-    val unhandled = Console.CYAN
-    val error = Console.RED
-    val good = Console.GREEN
-  }
 
   val PlaybackCallbacks = Set(
     "addSongFinished",
@@ -62,8 +55,8 @@ object ApiCallHander {
   }
 
   def getObjectFromUrl(request: Request, fetch: Request => Future[Response]): Future[Response] = {
-    val reqid = Log("getObjectFromUrl", request)
     val url = request.getParam("url")
+    val reqid = Log("getObjectFromUrl url=" + url, request)
 
     if (url == "people/state_machine/playlists/785247/more_like_this/") {
       Resp(reqid, fetch(request).map{ resp =>
@@ -138,6 +131,12 @@ object ApiCallHander {
   }
 
   // Helpers are organized into objects, because I felt like it.
+  object Colors {
+    val all = Set(unhandled, error, good)
+    val unhandled = Console.CYAN
+    val error = Console.RED
+    val good = Console.GREEN
+  }
 
   // Response helpers, for logging respose bodies and generating dummy responses
   object Resp {
@@ -181,5 +180,6 @@ object ApiCallHander {
 
     def isInternalTxId(id: String) =
       id.startsWith("deadbeef") && id.endsWith("c0ffeec0ffee")
-    }
+
+  }
 }
