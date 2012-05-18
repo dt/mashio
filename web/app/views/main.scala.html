@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <title>@title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/fileuploader.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")" />
         <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
@@ -23,7 +24,7 @@
           }
         </style>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")" />
-    
+
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,7 +44,7 @@
             <div class="span7"></div>
             <div class="span2 offset7">
               <a href="/upload" class="btn pull-right">Upload</a>
-            </div>          
+            </div>
         </div><!--/row-->
       </div><!--/container-->
     </div><!--/navbar-inner-->
@@ -59,7 +60,7 @@
               case (_, last) :: rest => {
                 <ul class="breadcrumb">
                   <li><a href={routes.Browse.index.toString}>Home</a> <span class="divider">/</span></li>
-                  {(<li>{last}</li> :: rest.map{case (link, name) => 
+                  {(<li>{last}</li> :: rest.map{case (link, name) =>
                     <li>{link.map(uri => <a href={uri.toString}>{name}</a>).getOrElse(name)} <span class="divider">/</span></li>}).reverse}
                 </ul>
               }

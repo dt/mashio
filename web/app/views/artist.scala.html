@@ -9,6 +9,10 @@
         @album.artwork.map{art => <img src="@routes.Media.art(art)" alt="@album.title" />}.getOrElse{@album.title}
       </a></li>
     }
-    <li class="span2"><a class="thumbnail" href="@routes.Browse.addAlbum(artist._id)">Add</a></li>
+    <li class="span2">
+      <a class="thumbnail" href="@routes.Browse.addAlbum(artist._id)">
+         <img src="@routes.Assets.at("images/file_add.png")" alt="Add Album" style="padding: 19px"/>
+      </a>
+    </li>
   </ul>
 }
