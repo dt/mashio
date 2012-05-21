@@ -6,8 +6,7 @@ import org.bson.types.ObjectId
 package object models {
   type RawId = ObjectId
   type Tagged[T] = { type Tag = T }
-  sealed trait RdioKey
-  type RdioId = String with Tagged[RdioKey]
+  type RdioKey[T] = String with Tagged[T]
   type TaggedId[T] = ObjectId with Tagged[T]
 
   object TaggedId {
@@ -17,7 +16,7 @@ package object models {
   }
 
   object RdioId {
-    def apply(s: String) = s.asInstanceOf[RdioId]
+    def apply[T](s: String) = s.asInstanceOf[RdioKey[T]]
   }
 
   object Query { def apply(clauses: (String, Any)*) = MongoDBObject.apply(clauses: _*) }

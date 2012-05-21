@@ -5,14 +5,15 @@
 
   <ul class="thumbnails">
     @albums.map{album =>
-      <li class="span2"><a class="thumbnail" href="@routes.Browse.album(artist._id, album._id)">
-        @album.artwork.map{art => <img src="@routes.Media.art(art)" alt="@album.title" />}.getOrElse{@album.title}
-      </a></li>
+      <li class="span2">
+        <a class="thumbnail" href="@routes.Browse.album(artist._id, album._id)">
+          @{
+          album.getArtwork.map(_ match {
+            case Album.RdioArt(uri) => uri.toString
+            case Album.LocalArt(path) => routes.Media.art(path).toString
+          }).map(url => <img src={url} alt={album.title} />).getOrElse(album.title)}
+        </a>
+      </li>
     }
-    <li class="span2">
-      <a class="thumbnail" href="@routes.Browse.addAlbum(artist._id)">
-         <img src="@routes.Assets.at("images/file_add.png")" alt="Add Album" style="padding: 19px"/>
-      </a>
-    </li>
   </ul>
 }

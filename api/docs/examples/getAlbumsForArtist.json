@@ -1,0 +1,103 @@
+{
+  "clientVersion": 1337377485, 
+  "result": {
+    "items": [
+      {
+        "artist": "Bright Moments", 
+        "artistKey": "r887596", 
+        "artistUrl": "/artist/Bright_Moments/", 
+        "baseIcon": "album/2/5/7/0000000000149752/square-200.jpg", 
+        "canSample": true, 
+        "canStream": true, 
+        "canTether": true, 
+        "displayDate": "Feb 21, 2012", 
+        "duration": 2329, 
+        "embedUrl": "http://rd.io/e/QVr9giJLxRM", 
+        "icon": "http://cdn3.rd.io/album/2/5/7/0000000000149752/square-200.jpg", 
+        "iframeUrl": "http://rd.io/i/QVr9giJLxRM", 
+        "isClean": false, 
+        "isExplicit": false, 
+        "key": "a1349458", 
+        "length": 10, 
+        "name": "Natives", 
+        "networkListeners": {
+          "items": [
+            {
+              "baseIcon": "user/2/4/c/0000000000023c42/square-100.jpg", 
+              "canUnfollow": true, 
+              "firstName": "Dan", 
+              "gender": "m", 
+              "icon": "http://cdn3.rd.io/user/2/4/c/0000000000023c42/square-100.jpg", 
+              "key": "s146498", 
+              "lastName": "Freeman", 
+              "libraryVersion": 1978, 
+              "location": "Cambridge, MA", 
+              "type": "s", 
+              "url": "/people/schief/"
+            }, 
+            {
+              "baseIcon": "user/c/d/a/0000000000057adc/square-100.jpg", 
+              "canUnfollow": true, 
+              "firstName": "Allyson", 
+              "gender": "f", 
+              "icon": "http://cdn3.rd.io/user/c/d/a/0000000000057adc/square-100.jpg", 
+              "key": "s359132", 
+              "lastName": "Schrader", 
+              "libraryVersion": 343, 
+              "location": "San Francisco, California, United States", 
+              "type": "s", 
+              "url": "/people/AllysonSchrader/"
+            }, 
+            {
+              "baseIcon": "user/6/d/f/00000000000e1fd6/square-100.jpg", 
+              "canUnfollow": true, 
+              "firstName": "Spencer", 
+              "gender": "m", 
+              "icon": "http://cdn3.rd.io/user/6/d/f/00000000000e1fd6/square-100.jpg", 
+              "key": "s925654", 
+              "lastName": "Williams", 
+              "libraryVersion": 1066, 
+              "location": "pdx", 
+              "type": "s", 
+              "url": "/people/spilliams/"
+            }, 
+            {
+              "baseIcon": "user/8/6/6/0000000000000668/square-100.jpg", 
+              "canUnfollow": true, 
+              "firstName": "Morgan", 
+              "gender": "f", 
+              "icon": "http://cdn3.rd.io/user/8/6/6/0000000000000668/square-100.jpg", 
+              "key": "s1640", 
+              "lastName": "Missen", 
+              "libraryVersion": 9, 
+              "location": "San Francisco, California, United States", 
+              "type": "s", 
+              "url": "/people/morgan/"
+            }
+          ], 
+          "total": 4, 
+          "type": "list"
+        }, 
+        "price": "8.99", 
+        "releaseDate": "2012-02-21", 
+        "shortUrl": "http://rd.io/x/QVr9giJLxRM", 
+        "trackKeys": [
+          "t15307292", 
+          "t15307334", 
+          "t15307370", 
+          "t15307417", 
+          "t15307434", 
+          "t15307474", 
+          "t15307528", 
+          "t15307539", 
+          "t15307597", 
+          "t15307612"
+        ], 
+        "type": "a", 
+        "url": "/artist/Bright_Moments/album/Natives/"
+      }
+    ], 
+    "type": "list"
+  }, 
+  "status": "ok"
+}

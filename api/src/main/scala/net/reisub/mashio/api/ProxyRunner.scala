@@ -38,6 +38,7 @@ object ProxyRunner {
         case 'q' => running = false
         case 'h' => printUsage()
         case 's' => printSettings()
+        case 't' => toggleTrace()
         case 'd' => toggleDebug()
         case 'i' => toggleInfo()
         case 'g' => toggleGathering()
@@ -58,32 +59,42 @@ object ProxyRunner {
   }
 
   def toggleDebug() {
-    if (debugOn) {
-      debug("turning debug off...")
-      setDebug(false)
+    if (Logger.debugOn) {
+      Logger.info("turning debug off...")
+      Logger.setDebug(false)
     } else {
-      setDebug(true)
-      debug("turning debug on...")
+      Logger.setDebug(true)
+      Logger.info("turning debug on...")
+    }
+  }
+
+  def toggleTrace() {
+    if (Logger.traceOn) {
+      Logger.info("turning trace off...")
+      Logger.setTrace(false)
+    } else {
+      Logger.setTrace(true)
+      Logger.info("turning trace on...")
     }
   }
 
   def toggleInfo() {
-    if (infoOn) {
-      info("turning info off...")
-      setInfo(false)
+    if (Logger.infoOn) {
+      Logger.info("turning Logger.info off...")
+      Logger.setInfo(false)
     } else {
-      setInfo(true)
-      info("turning info on...")
+      Logger.setInfo(true)
+      Logger.info("turning Logger.info on...")
    }
   }
 
   def toggleGathering() {
-    if (gatheringOn) {
-      info("turning gathering off...")
-      setGathering(false)
+    if (Harmonizer.on) {
+      Logger.info("turning gathering off...")
+      Harmonizer.isOn = false
     } else {
-      setGathering(true)
-      info("turning gathering on...")
+      Harmonizer.isOn = true
+      Logger.info("turning gathering on...")
     }
   }
 
@@ -103,9 +114,10 @@ object ProxyRunner {
   def printSettings() {
     println()
     println("Current Settings:")
-    println("    data gathering:\t" + bold(gatheringOn))
-    println("    info printing:\t" + bold(infoOn))
-    println("    debug printing:\t" + bold(debugOn))
+    println("    data gathering:\t" + bold(Harmonizer.on))
+    println("    info printing:\t"  + bold(Logger.infoOn))
+    println("    debug printing:\t" + bold(Logger.debugOn))
+    println("    trace printing:\t" + bold(Logger.traceOn))
     println()
   }
 
@@ -113,6 +125,7 @@ object ProxyRunner {
     def usage(key: String, desc: String) = ("    %s\t%s").format(bold(key), desc)
     println("Keys:")
     println(usage("q","quit"))
+    println(usage("t","toggle trace"))
     println(usage("d","toggle debug"))
     println(usage("i","toggle info"))
     println(usage("g","toggle gathering"))
@@ -126,7 +139,7 @@ object ProxyRunner {
     val artists = Artist.db.findAll().toList
     println("Artists (" + artists.size + "): ")
     artists.foreach{ x =>
-      val rdid = x.rdioId.map("[" + _ + "]").getOrElse("")
+      val rdid = "[" + x.rdio.key + "]"
       println("    " + x.name + "\t" + rdid)
     }
     println()

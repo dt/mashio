@@ -1,5 +1,6 @@
 package net.reisub.mashio.api
 
+import net.reisub.mashio.models._
 import play.api.libs.json._
 
 class ApiTrack(
@@ -34,6 +35,56 @@ class ApiTrack(
 )
 
 object ApiTrack {
+  val DefaultBaseIcon = "album/d/2/d/0000000000018d2d/square-200.jpg"
+  val DefaultIcon = "http://cdn3.rd.io/" + DefaultBaseIcon
+
+  def streamUrl(track: Track) = StreamServer + "/stream/" + track.path.getOrElse(track._id.toString + ".mp3")
+
+  def shortUrl(tid: Track.Id) = ContentServer + "/t/" + tid.toString
+
+  def iconUrl(album: Album) = album.getArtwork match {
+    case Some(Album.RdioArt(uri)) => uri
+    case Some(Album.LocalArt(path)) => ContentServer + "/art/" + path
+    case None => DefaultIcon
+  }
+
+  def fromTrack(i: DisplayTrack): ApiTrack = {
+    val albumArtist = Artist.db.findOneByID(i.album.artist).getOrElse(i.artist)
+    val url = shortUrl(i.track._id)
+    val icon = iconUrl(i.album)
+
+    new ApiTrack(
+      baseIcon = DefaultBaseIcon,
+      canDownloadAlbumOnly = false,
+      iframeUrl = url,
+      artistUrl = i.album.rdio.url,
+      albumUrl = i.album.rdio.url,
+      duration = i.track.length,
+      album = i.album.title,
+      isClean = false,
+      albumKey = i.album.rdio.key,
+      shortUrl = url,
+      albumArtist = albumArtist.name,
+      canStream = true,
+      embedUrl = url,
+      itemType = "t",
+      price = "None",
+      trackNum = i.track.trackNum,
+      albumArtistKey = albumArtist.rdio.key,
+      key = i.track.rdio.key,
+      icon = icon,
+      canSample = false,
+      name = i.track.title,
+      isExplicit = false,
+      artist = i.artist.name,
+      url = i.track.rdio.url,
+      artistKey = i.artist.rdio.key,
+      canDownload = false,
+      length = 1,
+      canTether = false
+    )
+  }
+
   implicit object TrackInfoFormat extends Format[ApiTrack] {
     def reads(json: JsValue): ApiTrack = new ApiTrack(
       baseIcon          = (json \ "baseIcon").asOpt[String].getOrElse(""),
@@ -66,7 +117,7 @@ object ApiTrack {
       canTether         = (json \ "canTether").asOpt[Boolean].getOrElse(true)
     )
 
-    def writes(t: ApiTrack): JsValue = JsObject(List(
+    def writes(t: ApiTrack): JsValue = JsObject(Seq(
       "baseIcon"        -> JsString(t.baseIcon),
       "canDownloadAlbumOnly"  -> JsBoolean(t.canDownloadAlbumOnly),
       "iframeUrl"       -> JsString(t.iframeUrl),

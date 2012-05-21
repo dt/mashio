@@ -7,6 +7,7 @@ import com.novus.salat.dao.{ModelCompanion, SalatDAO}
 
 abstract class MetaModel[T <: AnyRef : Manifest](val collectionName: String) {
   type Id = TaggedId[T]
+  type RdioId = RdioKey[T]
   def newId = TaggedId.get[T]
 
   object db extends ModelCompanion[T, Id] {
@@ -22,6 +23,13 @@ abstract class MetaModel[T <: AnyRef : Manifest](val collectionName: String) {
   def clearAll() = db.remove(Query())
 
   def reload(id: Id): T = db.findOneByID(id).get
+
+  object Util {
+    private val reg = "[^A-Za-z0-9_]".r
+    def urlStr(prefix: String, name: String) = prefix + reg.replaceAllIn(name.replace(" ", "_"), "") + "/"
+    def keyStr[T](pre: String) = RdioId[T](pre + "0" + (new ObjectId).toString)
+
+  }
 }
 
 object MetaModel {

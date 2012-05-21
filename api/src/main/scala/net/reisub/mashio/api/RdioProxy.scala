@@ -9,11 +9,11 @@ import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1
 import play.api.libs.json._
+import scala.util.Random
 
 class RdioProxy extends Service[Request, Response] {
   def baseClient(host: String) = ClientBuilder().hosts(host).hostConnectionLimit(2).codec(Http()).build()
 
-  val handler = ApiCallHandler
 
   val rdioWeb: Service[HttpRequest, HttpResponse] = baseClient("rdio.com:80")
   val rdioMobile: Service[HttpRequest, HttpResponse] = baseClient("m.rdio.com:80")
@@ -31,16 +31,17 @@ class RdioProxy extends Service[Request, Response] {
   def apply(request: Request) = {
     if (isApi(request)) {
       try {
-        handler.handleApiReq(request, fetchRdioResp _)
+        val randStr = "%03d".format(Random.nextInt(999))
+        new ApiCallHandler(randStr, request, fetchRdioResp(request)).handle()
       } catch {
         case e: Exception => {
-          println(Console.RED + e.getClass.getName + Console.WHITE)
-          e.printStackTrace
+          Logger.error(e.getClass.getName)
+          Logger.error({e.printStackTrace; ""})
           fetchRdioResp(request)
         }
       }
     } else {
-      debug(Console.BLUE + "[ passing "+request.path+" thorugh ]" + Console.WHITE)
+      Logger.debug(Colors.web("[ passing "+request.path+" thorugh ]"))
       fetchRdioResp(request)
     }
   }

@@ -18,7 +18,12 @@ object Browse extends Controller {
    } yield {
      val tracks = Track.db.findAll(album.tracks).toSeq.sortBy(_.trackNum)
      val artists = Artist.db.findAll(tracks.map(_.artist)).map(x => x._id -> x).toMap
-     Ok(views.html.album(artist, album, tracks.map(x => DisplayTrack(x, artists.get(x.artist).getOrElse(artist)))))
+     val displayTracks = tracks.map(track => DisplayTrack(
+        artist = artists.get(track.artist).getOrElse(artist),
+        album = album,
+        track = track
+       ))
+     Ok(views.html.album(artist, album, displayTracks))
    }}.getOrElse(NotFound)
   }
 

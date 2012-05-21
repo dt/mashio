@@ -6,5 +6,5 @@ GET     /browse                     controllers.Browse.index
 GET     /upload                     controllers.Upload.index
 POST    /upload                     controllers.Upload.upload
 GET     /art/*file                  controllers.Media.art(file)
-GET     /getTrack/*file             controllers.Media.track(file)
+GET     /stream/*file               controllers.Media.track(file)
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

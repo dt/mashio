@@ -1,0 +1,46 @@
+    {
+    "playerName": "_web_8130078",
+    "manualPlay": "true",
+    "extras": "*.WEB",
+    "_authorization_key": "eyJyYW5kIjogMjY5NTg0Mjk4NiwgImtleSI6ICJzMzc2Nzk3IiwgInRpbWUiOiAxMzM3NDQzNjY3fQ.coonvWqHng8sGWZDhi-Kj7dUjac",
+    "key": "t15307597",
+    "v": "20120503",
+    "requiresUnlimited": false,
+    "type": "mp3-high",
+    "method": "getPlaybackInfo"
+}
+{
+    "status": "ok",
+    "result": {
+        "baseIcon": "album/d/2/d/0000000000018d2d/square-200.jpg",
+        "userHasUnlimited": true,
+        "canDownloadAlbumOnly": false,
+        "artistUrl": "/artist/Animal_Collective/",
+        "duration": 270,
+        "album": "Merriweather Post Pavilion",
+        "isClean": false,
+        "albumUrl": "/artist/Animal_Collective/album/Merriweather_Post_Pavilion/",
+        "shortUrl": "http://rd.io/x/QVr9gjdNuo4",
+        "albumArtist": "Animal Collective",
+        "canStream": true,
+        "embedUrl": "http://rd.io/e/QVr9gjdNuo4",
+        "type": "t",
+        "price": "None",
+        "surl": "http://m.cdn2.rd.io/s/music/1/f/6/5/1f658583f7814c1881329630fb39d719/full-192.mp3?80e2d2f4276a71565175a0c05c3f54afe89e4a8a0723795d026474c243c47eb7caba",
+        "trackNum": 4,
+        "albumArtistKey": "r87422",
+        "key": "t1239247",
+        "icon": "http://cdn3.rd.io/album/d/2/d/0000000000018d2d/square-200.jpg",
+        "canSample": true,
+        "name": "Summertime Clothes",
+        "isExplicit": false,
+        "artistKey": "r87422",
+        "url": "/artist/Animal_Collective/album/Merriweather_Post_Pavilion/track/Summertime_Clothes/",
+        "albumKey": "a101677",
+        "artist": "Animal Collective",
+        "canDownload": false,
+        "length": 1,
+        "canTether": true
+    },
+    "clientVersion": 1337377485
+}
