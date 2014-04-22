@@ -1,3 +1,5 @@
+ABANDONED -- does not work with rdio's latest streaming formats
+==
 Mashio - a Content-injecting Rdio Proxy
 ==
 Mashio consists of 3 parts:
